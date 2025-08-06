@@ -1,5 +1,6 @@
 {
-  "name": "Dream Square Resort Interactive Map",
-  "description": "An interactive, top-down map of the Dream Square Resort. Hover over buildings to see details and use the legend to toggle map features.",
-  "requestFramePermissions": []
+  "name": "Interactive Resort Map",
+  "description": "An interactive, top-down map of the Dream Square Resort. Hover over buildings and points of interest to see their names and hear a sound effect. The application features a custom loading screen that preloads all assets for a smooth, game-like experience.",
+  "requestFramePermissions": [],
+  "prompt": ""
 }

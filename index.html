@@ -1,20 +1,56 @@
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dream Square Resort Map</title>
+    <title>Interactive Resort Map</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <script type="importmap">
 {
   "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
     "react/": "https://esm.sh/react@^19.1.0/",
-    "react": "https://esm.sh/react@^19.1.0"
+    "react": "https://esm.sh/react@^19.1.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/",
+    "path": "https://esm.sh/path@^0.12.7",
+    "vite": "https://esm.sh/vite@^7.0.6",
+    "url": "https://esm.sh/url@^0.11.4"
   }
 }
 </script>
+<style>
+  .map-logo {
+    position: absolute;
+    z-index: 10;
+    transition: all 0.3s ease-in-out;
+    /* Desktop styles */
+    top: 20px;
+    left: 20px;
+    width: 150px;
+    height: auto;
+  }
+
+  @keyframes float-across {
+    from {
+      transform: translateX(4500px);
+    }
+    to {
+      transform: translateX(-1500px);
+    }
+  }
+
+  .cloud {
+    position: absolute;
+    animation-name: float-across;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+    will-change: transform;
+  }
+</style>
 <link rel="stylesheet" href="/index.css">
 </head>
   <body class="bg-[#177b61]">
