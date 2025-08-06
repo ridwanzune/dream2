@@ -11,8 +11,8 @@ interface InfoPanelProps {
     onTransitionEnd: () => void;
 }
 
-const CloseIcon: React.FC = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+const CloseIcon: React.FC<{ className?: string }> = ({ className = 'h-6 w-6' }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
     </svg>
 );
@@ -123,14 +123,24 @@ const InfoPanel: React.FC<InfoPanelProps> = ({ buildingData, isVisible, onMouseE
             aria-labelledby="info-panel-title"
             aria-hidden={!isVisible}
         >
+            {/* Mobile-only close button, absolutely positioned to stay visible */}
+            <button
+                onClick={onClose}
+                className="md:hidden absolute top-2 right-2 z-20 p-2 rounded-full bg-black/40 text-gray-200 active:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                aria-label="Close panel"
+            >
+                <CloseIcon className="h-8 w-8" />
+            </button>
+
             <div className="h-full flex flex-col">
                 <header className="p-4 flex justify-between items-center border-b border-gray-700/50 flex-shrink-0">
-                    <h2 id="info-panel-title" className="text-2xl font-bold" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+                    <h2 id="info-panel-title" className="text-2xl font-bold pr-8" style={{ fontFamily: 'Orbitron, sans-serif' }}>
                         {buildingData.displayName}
                     </h2>
+                    {/* Desktop-only close button, in the header flow */}
                     <button
                         onClick={onClose}
-                        className="p-1 rounded-full text-gray-400 hover:bg-gray-700 hover:text-white transition-colors"
+                        className="hidden md:block p-1 rounded-full text-gray-400 hover:bg-gray-700 hover:text-white transition-colors"
                         aria-label="Close panel"
                     >
                         <CloseIcon />
