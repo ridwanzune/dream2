@@ -27,7 +27,7 @@ const SoundControl: React.FC<SoundControlProps> = ({ isMuted, onToggle }) => {
     <button
       onClick={onToggle}
       aria-label={isMuted ? 'Unmute sound' : 'Mute sound'}
-      className="absolute top-4 left-4 md:top-auto md:bottom-20 md:right-4 z-[2000] p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+      className="absolute top-4 left-4 md:top-auto md:left-auto md:bottom-20 md:right-4 z-[2000] p-2 rounded-full bg-black/40 text-white hover:bg-black/60 transition-colors focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
     >
       {isMuted ? <SoundOffIcon /> : <SoundOnIcon />}
     </button>

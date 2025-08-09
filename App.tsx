@@ -171,11 +171,28 @@ const App: React.FC = () => {
   
   useEffect(() => {
     if (loadingProgress >= 100 && !assetsLoaded) {
-      appContainerRef.current?.click();
+      // This attempts to programmatically click the screen 1 second after
+      // loading is complete to satisfy browser audio autoplay policies, which
+      // require a user gesture. This is a more robust method than a direct .click() call.
+      const clickTimer = setTimeout(() => {
+        if (appContainerRef.current) {
+          const clickEvent = new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true,
+            view: window,
+          });
+          appContainerRef.current.dispatchEvent(clickEvent);
+        }
+      }, 1000);
+
       const transitionTimer = setTimeout(() => {
         setAssetsLoaded(true);
       }, 2000);
-      return () => clearTimeout(transitionTimer);
+
+      return () => {
+        clearTimeout(clickTimer);
+        clearTimeout(transitionTimer);
+      };
     }
   }, [loadingProgress, assetsLoaded]);
 
