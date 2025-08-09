@@ -30,9 +30,8 @@ const App: React.FC = () => {
     return LAYER_DATA
       .map(layer => { // Remap indices for alternate view for correct sorting
         if (layer.name === 'Surface 2') return { ...layer, index: 1 };
-        // Per request, ensure Tree 2 is on top of all other layers.
-        // A high z-index like 99 puts it above other layers but below the hover effect (100).
-        if (layer.name === 'Tree 2') return { ...layer, index: 99 };
+        // Per user request, ensure Tree 2 is below the clouds (z-index 99) but above other layers.
+        if (layer.name === 'Tree 2') return { ...layer, index: 98 };
         return layer;
       })
       .filter(layer => { // Filter layers based on the selected view
