@@ -1,9 +1,12 @@
+
 import React from 'react';
 import { TOGGLEABLE_LAYERS, BUILDING_LAYER_NAMES, OTHER_FEATURES_LAYER_NAMES } from '../constants';
 
 interface ControlPanelProps {
   hiddenLayers: Set<string>;
   onToggle: (layerName: string) => void;
+  isAlternateView: boolean;
+  onToggleView: () => void;
 }
 
 const Toggle: React.FC<{
@@ -35,7 +38,7 @@ const Toggle: React.FC<{
   );
 };
 
-const ControlPanel: React.FC<ControlPanelProps> = ({ hiddenLayers, onToggle }) => {
+const ControlPanel: React.FC<ControlPanelProps> = ({ hiddenLayers, onToggle, isAlternateView, onToggleView }) => {
   return (
     <div className="absolute bottom-0 left-0 right-0 py-1 bg-black/50 backdrop-blur-sm z-[1000]">
       <div className="container mx-auto flex justify-center items-center gap-x-3 px-2 sm:gap-x-4">
@@ -59,6 +62,13 @@ const ControlPanel: React.FC<ControlPanelProps> = ({ hiddenLayers, onToggle }) =
             />
           );
         })}
+        <Toggle
+            key="view"
+            label="View"
+            layerName="view-toggle"
+            isChecked={isAlternateView}
+            onToggle={onToggleView}
+        />
       </div>
     </div>
   );

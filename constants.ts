@@ -1,5 +1,4 @@
 
-
 import { LayerData, ImageUrls, BuildingDetails } from './types';
 
 export const BACKGROUND_MUSIC_URL = 'https://res.cloudinary.com/dy80ftu9k/video/upload/v1754454026/nature-216798-trimmed_1_yaivbb.mp3';
@@ -84,6 +83,8 @@ export const NON_INTERACTIVE_LAYER_NAMES: string[] = [
     'Tree copy 56',
     'Map Ledgend',
     'Entrance',
+    'Surface 2',
+    'Tree 2',
 ];
 
 export const BUILDING_LAYER_NAMES: string[] = [
@@ -179,7 +180,9 @@ export const LAYER_DATA: LayerData[] = [
   { "index": 54, "name": "Common Washroom", "filename": "Washroom.png", "x": 1360, "y": 1156, "width": 61, "height": 56, "opacity": 255 },
   { "index": 51, "name": "Tennis Court", "filename": "Tennis_Court.png", "x": 1622, "y": 874, "width": 163, "height": 96, "opacity": 255 },
   { "index": 52, "name": "Parking 1", "filename": "Parking_1_.png", "x": 1278, "y": 1020, "width": 201, "height": 164, "opacity": 255 },
-  { "index": 53, "name": "Parking 2", "filename": "Parking_2.png", "x": 1201, "y": 1153, "width": 205, "height": 225, "opacity": 255 }
+  { "index": 53, "name": "Parking 2", "filename": "Parking_2.png", "x": 1201, "y": 1153, "width": 205, "height": 225, "opacity": 255 },
+  { "index": 55, "name": "Surface 2", "filename": "Surface_2.png", "x": 753, "y": -3, "width": 3042, "height": 2110, "opacity": 255 },
+  { "index": 56, "name": "Tree 2", "filename": "Tree_2.png", "x": 716, "y": -3, "width": 2343, "height": 2021, "opacity": 255 }
 ];
 
 export const IMAGE_URLS: ImageUrls = {
@@ -235,5 +238,7 @@ export const IMAGE_URLS: ImageUrls = {
   "Common_Washroom": "https://res.cloudinary.com/dukaroz3u/image/upload/v1754447624/Dreamsquare_layers/gmqlhaopkpq6xf54dkti.png",
   "Tennis_Court": "https://res.cloudinary.com/dukaroz3u/image/upload/v1754447622/Dreamsquare_layers/dpyhyoy0k4rczt6uztet.png",
   "Parking_1": "https://res.cloudinary.com/dy80ftu9k/image/upload/v1754449049/Parking_1__yui2kf.png",
-  "Parking_2": "https://res.cloudinary.com/dy80ftu9k/image/upload/v1754449049/Parking_2_whbw3x.png"
+  "Parking_2": "https://res.cloudinary.com/dy80ftu9k/image/upload/v1754449049/Parking_2_whbw3x.png",
+  "Surface_2": "https://res.cloudinary.com/dukaroz3u/image/upload/v1754712613/Surface_2_ozgny9.png",
+  "Tree_2": "https://res.cloudinary.com/dukaroz3u/image/upload/v1754712613/Tree_2_ce2mtr.png"
 };

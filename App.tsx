@@ -1,5 +1,4 @@
 
-
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { Layer, BuildingDetails } from './types';
 import { LAYER_DATA, IMAGE_URLS, BACKGROUND_COLOR, HOVER_SOUND_URL, BUILDING_LAYER_NAMES, OTHER_FEATURES_LAYER_NAMES, CLOUDS_CONFIG, BUILDING_INFO, BACKGROUND_MUSIC_URL } from './constants';
@@ -13,6 +12,7 @@ const App: React.FC = () => {
   const [assetsLoaded, setAssetsLoaded] = useState<boolean>(false);
   const [loadingProgress, setLoadingProgress] = useState<number>(0);
   const [hiddenLayers, setHiddenLayers] = useState<Set<string>>(new Set());
+  const [isAlternateView, setIsAlternateView] = useState<boolean>(false);
   const appContainerRef = useRef<HTMLDivElement>(null);
 
   // Info Panel State
@@ -27,11 +27,26 @@ const App: React.FC = () => {
   const [isMuted, setIsMuted] = useState<boolean>(false);
 
   const layers: Layer[] = useMemo(() => {
-    return LAYER_DATA.map(layerData => ({
-      ...layerData,
-      url: IMAGE_URLS[layerData.name.replace(/ /g, '_')] || ''
-    })).filter(layer => layer.url && layer.name !== 'Map Ledgend' && !hiddenLayers.has(layer.name));
-  }, [hiddenLayers]);
+    return LAYER_DATA
+      .map(layer => { // Remap indices for alternate view for correct sorting
+        if (layer.name === 'Surface 2') return { ...layer, index: 1 };
+        // Per request, ensure Tree 2 is on top of all other layers.
+        // A high z-index like 99 puts it above other layers but below the hover effect (100).
+        if (layer.name === 'Tree 2') return { ...layer, index: 99 };
+        return layer;
+      })
+      .filter(layer => { // Filter layers based on the selected view
+        if (isAlternateView) {
+          return layer.name !== 'Surface';
+        }
+        return layer.name !== 'Surface 2' && layer.name !== 'Tree 2';
+      })
+      .map(layerData => ({ // Map to full Layer object with URL
+        ...layerData,
+        url: IMAGE_URLS[layerData.name.replace(/ /g, '_')] || ''
+      }))
+      .filter(layer => layer.url && layer.name !== 'Map Ledgend' && !hiddenLayers.has(layer.name)); // Filter out layers that are explicitly hidden by the user
+  }, [hiddenLayers, isAlternateView]);
 
   const handleToggleLayer = (layerIdentifier: string) => {
     setHiddenLayers(prev => {
@@ -58,6 +73,10 @@ const App: React.FC = () => {
       }
       return next;
     });
+  };
+  
+  const handleToggleView = () => {
+    setIsAlternateView(prev => !prev);
   };
 
   const unlockAudioContext = useCallback(() => {
@@ -277,7 +296,7 @@ const App: React.FC = () => {
         )}
       </div>
 
-      {assetsLoaded && <ControlPanel hiddenLayers={hiddenLayers} onToggle={handleToggleLayer} />}
+      {assetsLoaded && <ControlPanel hiddenLayers={hiddenLayers} onToggle={handleToggleLayer} isAlternateView={isAlternateView} onToggleView={handleToggleView} />}
 
       {assetsLoaded && infoPanelData && (
         <InfoPanel 
