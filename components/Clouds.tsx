@@ -1,3 +1,4 @@
+
 import React, { useMemo } from 'react';
 import { CLOUDS_CONFIG } from '../constants';
 
@@ -19,7 +20,7 @@ const Clouds: React.FC = () => {
             opacity: cloud.opacity,
             animationDuration: `${cloud.duration}s`,
             animationDelay: cloudAnimationDelays[index],
-            zIndex: 50, // Position clouds above surface but below most interactive items
+            zIndex: 99, // Position clouds above all layers, but below tooltips/UI
           }}
         >
           <img src={cloud.src} alt="animated cloud" className="w-full h-full" draggable="false" />
